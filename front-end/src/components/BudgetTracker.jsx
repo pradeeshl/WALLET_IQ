@@ -20,13 +20,11 @@ const BudgetTracker = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    // If type changes to income, set category automatically
     if (name === 'type' && value === 'income') {
       setFormData({
         ...formData,
         [name]: value,
-        category: 'Salary/Income' // Auto-set category for income
+        category: 'Salary/Income'
       });
     } else {
       setFormData({
@@ -46,8 +44,6 @@ const BudgetTracker = () => {
       setError('Please fill in all required fields');
       return;
     }
-
-    // For expense type, category is required
     if (formData.type === 'expense' && !formData.category) {
       setError('Please select a category for expense');
       return;
@@ -86,7 +82,7 @@ const BudgetTracker = () => {
           SPENDSENSE - Budget Tracker
         </h1>
         <div className="flex gap-4 p-6">
-          <span className="text-gray-800 text-sm">Welcome, {user.name}!</span>
+          <span className="text-gray-800 text-2xl">Welcome, {user.name}!</span>
           <Button onClick={handleLogout}>LOGOUT</Button>
         </div>
       </div>

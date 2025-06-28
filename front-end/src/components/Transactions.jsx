@@ -28,6 +28,23 @@ const Transactions = () => {
     }
   };
 
+  // Calculate totals and remaining amount
+  const calculateTotals = () => {
+    const totalIncome = clientData
+      .filter(transaction => transaction.type === 'income')
+      .reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
+    
+    const totalExpenses = clientData
+      .filter(transaction => transaction.type === 'expense')
+      .reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
+    
+    const remainingAmount = totalIncome - totalExpenses;
+    
+    return { totalIncome, totalExpenses, remainingAmount };
+  };
+
+  const { totalIncome, totalExpenses, remainingAmount } = calculateTotals();
+
   const handleLogout = () => {
     localStorage.removeItem('user');
     navigate('/');
@@ -78,6 +95,28 @@ const Transactions = () => {
                 {error}
               </div>
             )}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 bg-gradient-to-r from-teal-200 to-lime-200 p-6 rounded-lg">
+              <div className="bg-gradient-to-br from-green-100 to-green-200 border border-green-300 rounded-lg p-4 shadow-md">
+                <h3 className="text-sm font-medium text-green-800 mb-1">Total Income</h3>
+                <p className="text-2xl font-bold text-green-600">₹{totalIncome.toFixed(2)}</p>
+              </div>
+              <div className="bg-gradient-to-br from-red-100 to-red-200 border border-red-300 rounded-lg p-4 shadow-md">
+                <h3 className="text-sm font-medium text-red-800 mb-1">Total Expenses</h3>
+                <p className="text-2xl font-bold text-red-600">₹{totalExpenses.toFixed(2)}</p>
+              </div>
+              <div className={`${remainingAmount >= 0 ? 'bg-gradient-to-br from-blue-100 to-blue-200 border-blue-300' : 'bg-gradient-to-br from-orange-100 to-orange-200 border-orange-300'} border rounded-lg p-4 shadow-md`}>
+                <h3 className={`text-sm font-medium mb-1 ${remainingAmount >= 0 ? 'text-blue-800' : 'text-orange-800'}`}>
+                  Remaining Balance
+                </h3>
+                <p className={`text-2xl font-bold ${remainingAmount >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
+                  ₹{remainingAmount.toFixed(2)}
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-300 rounded-lg p-4 shadow-md">
+                <h3 className="text-sm font-medium text-gray-800 mb-1">Total Transactions</h3>
+                <p className="text-2xl font-bold text-gray-600">{clientData.length}</p>
+              </div>
+            </div>
 
             {clientData.length === 0 ? (
               <div className="text-center py-8">
@@ -96,6 +135,7 @@ const Transactions = () => {
                       <th className="border border-gray-300 p-3 text-left font-semibold">Title</th>
                       <th className="border border-gray-300 p-3 text-left font-semibold">Type</th>
                       <th className="border border-gray-300 p-3 text-left font-semibold">Date</th>
+                      <th className="border border-gray-300 p-3 text-left font-semibold">Balance (₹)</th>
                     </tr>
                   </thead>
                   <tbody>
