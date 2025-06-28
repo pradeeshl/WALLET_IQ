@@ -34,7 +34,6 @@ const Transactions = () => {
   };
 
   useEffect(() => {
-    // Check if user is logged in
     if (!user.id) {
       navigate('/login');
       return;

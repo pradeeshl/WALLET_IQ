@@ -24,8 +24,6 @@ const Form = () => {
     event.preventDefault();
     setError('');
     setSuccess('');
-
-    // Basic validation
     if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
       setError('Please fill in all fields');
       return;
@@ -48,7 +46,6 @@ const Form = () => {
         // Store user data in localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setFormData({ name: '', email: '', password: '', confirmPassword: '' });
-        // Redirect to budget tracker after 1.5 seconds
         setTimeout(() => {
           navigate('/budget-tracker');
         }, 1500);

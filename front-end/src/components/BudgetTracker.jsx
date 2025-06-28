@@ -65,7 +65,6 @@ const BudgetTracker = () => {
 
       if (response.data) {
         setSuccess('Transaction added successfully!');
-        // Redirect to table view after 1.5 seconds
         setTimeout(() => {
           navigate('/transactions');
         }, 1500);
@@ -174,9 +173,7 @@ const BudgetTracker = () => {
                   <option value="Food">Food</option>
                   <option value="Transportation">Transportation</option>
                   <option value="Entertainment">Entertainment</option>
-                  <option value="Healthcare">Healthcare</option>
-                  <option value="Shopping">Shopping</option>
-                  <option value="Bills">Bills</option>
+                    <option value="Dress">Dress</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
@@ -193,7 +190,6 @@ const BudgetTracker = () => {
                   readOnly
                   className="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg shadow-sm bg-gray-100 text-gray-600"
                 />
-                <p className="text-xs text-gray-500 mt-1">Category is automatically set for income transactions</p>
               </div>
             )}
 
