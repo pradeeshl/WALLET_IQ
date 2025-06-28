@@ -14,7 +14,12 @@ const HeroSection = ({ onSubmit }) => {
             <Link to='login'><Button>LOGIN</Button></Link>
             </div>
         </div>
-         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-12">
+         <div 
+           className="min-h-screen flex items-center justify-center px-4 py-12"
+           style={{
+             background: 'conic-gradient(at bottom left, #f0abfc, #4ade80, #be185d)'
+           }}
+         >
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-200">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
@@ -55,6 +60,7 @@ const HeroSection = ({ onSubmit }) => {
               </div>
             </div>
           </div>
+          
         </div>
 
        
