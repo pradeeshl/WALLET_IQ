@@ -32,9 +32,7 @@ const Home = () => {
   }, []);
   return (
     <>
-    
-        <HeroSection onSubmit={onSubmit} />
-    
+        <HeroSection />
     </>
   )
 }
