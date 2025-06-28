@@ -155,6 +155,7 @@ const Transactions = () => {
             </div>
           </div>
         </div>
+       <script async id="vectorshift-chat-widget" src="https://app.vectorshift.ai/chatWidget.js" chatbot-id="685fca6420d9549cc6cc8eae" chatbot-height="600px" chatbot-width="400px" />
       </div>
     </>
   );
