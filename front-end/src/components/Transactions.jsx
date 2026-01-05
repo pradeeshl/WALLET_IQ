@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from './Button';
 import Table from './Details';
 import axios from 'axios';
+import ChatBot from './ChatBot';
 
 const Transactions = () => {
   const navigate = useNavigate();
@@ -16,7 +17,14 @@ const Transactions = () => {
   const fetchTransactions = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/api/GetData");
+      // Make sure we have a user ID
+      if (!user.id) {
+        navigate('/login');
+        return;
+      }
+      
+      // Pass the user_id as a query parameter
+      const response = await axios.get(`http://localhost:3000/api/GetData?user_id=${user.id}`);
       console.log("API response:", response.data);
       setClientData(response.data);
       setError('');
@@ -51,12 +59,16 @@ const Transactions = () => {
   };
 
   useEffect(() => {
-    if (!user.id) {
+    // Check if the user is logged in and has an ID
+    if (!user || !user.id) {
+      console.log("No user ID found, redirecting to login");
       navigate('/login');
       return;
     }
+    
+    // Fetch transactions for this specific user
     fetchTransactions();
-  }, []);
+  }, [navigate, user.id]);
 
   if (loading) {
     return (
@@ -120,7 +132,7 @@ const Transactions = () => {
 
             {clientData.length === 0 ? (
               <div className="text-center py-8">
-                <p className="text-gray-500 text-lg">No transactions found</p>
+                <p className="text-gray-500 text-lg">You don't have any transactions yet</p>
                 <Link to="/budget-tracker" className="mt-4 inline-block">
                   <Button>Add Your First Transaction</Button>
                 </Link>
@@ -152,11 +164,12 @@ const Transactions = () => {
               >
                 Refresh Data
               </button>
-            </div>
+              <ChatBot />
           </div>
         </div>
-       <script async id="vectorshift-chat-widget" src="https://app.vectorshift.ai/chatWidget.js" chatbot-id="685fca6420d9549cc6cc8eae" chatbot-height="600px" chatbot-width="400px" />
+
       </div>
+    </div>
     </>
   );
 };

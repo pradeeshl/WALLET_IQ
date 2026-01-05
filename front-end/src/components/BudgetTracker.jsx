@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from './Button';
 import axios from 'axios';
@@ -17,6 +17,14 @@ const BudgetTracker = () => {
 
   // Get user from localStorage
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  // Check if user is logged in when component mounts
+  useEffect(() => {
+    if (!user || !user.id) {
+      console.log("No user ID found, redirecting to login");
+      navigate('/login');
+    }
+  }, [navigate, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +46,15 @@ const BudgetTracker = () => {
     event.preventDefault();
     setError('');
     setSuccess('');
+
+    // Check if user is logged in
+    if (!user || !user.id) {
+      setError('You must be logged in to add transactions');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+      return;
+    }
 
     // Basic validation
     if (!formData.title || !formData.amount) {

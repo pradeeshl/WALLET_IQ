@@ -3,8 +3,16 @@ import { query } from "../db.js";
 
 export const GetData = async (req, res) => {
   try {
-    const { rows } = await query("SELECT * FROM tracker");
-    console.log("Data fetched successfully");
+    // Get the user_id from query parameters
+    const user_id = req.query.user_id;
+    
+    if (!user_id) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+    
+    // Filter transactions by user_id
+    const { rows } = await query("SELECT * FROM tracker WHERE user_id = $1", [user_id]);
+    console.log("Data fetched successfully for user:", user_id);
     res.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
