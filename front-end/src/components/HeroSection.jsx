@@ -7,7 +7,7 @@ const HeroSection = ({ onSubmit }) => {
   <>
   <div className="h-[60px] bg-amber-300 max-w-screen flex justify-between items-center px-4">
        <h1 className="text-center text-2xl font-bold text-gray-800">
-         SPENDSENSE
+         WALLETIQ
 </h1>
          <div className="flex gap-4 p-6">
         <Link to='signup'> <Button >SIGN UP</Button></Link>

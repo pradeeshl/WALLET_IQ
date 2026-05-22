@@ -82,7 +82,7 @@ const Transactions = () => {
     <>
       <div className="h-[60px] bg-amber-300 max-w-screen flex justify-between items-center px-4">
         <h1 className="text-center text-2xl font-bold text-gray-800">
-          SPENDSENSE - Transactions
+          WALLETIQ - Transactions
         </h1>
         <div className="flex gap-4 p-6">
           <span className="text-gray-800 text-2xl">Welcome, {user.name}!</span>
