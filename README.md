@@ -133,14 +133,9 @@ All API endpoints are prefixed with `/api`
 - Budget management routes
 - Transaction routes
 
-## License
-
-ISC
 
 ## Author
 
 Pradeesh L
 
 ---
-
-Built with ❤️ using React and Express
